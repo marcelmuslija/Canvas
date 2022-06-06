@@ -1,5 +1,6 @@
 package graphics.objects;
 
+import graphics.geometry.GeometryUtil;
 import graphics.geometry.Point;
 import graphics.geometry.Rectangle;
 import graphics.rendering.Renderer;
@@ -35,51 +36,20 @@ public class Oval extends AbstractGraphicalObject {
 
     @Override
     public double selectionDistance(Point mousePoint) {
-        Rectangle boundingBox = getBoundingBox();
-        int x = boundingBox.getX();
-        int y = boundingBox.getY();
-        int width = boundingBox.getWidth();
-        int height = boundingBox.getHeight();
-
-        Point topLeft = new Point(x, y);
-        Point topRight = new Point(x + width, y);
-        Point bottomLeft = new Point(x, y + height);
-        Point bottomRight = new Point(x + width, y + height);
-
-        List<LineSegment> borders = new ArrayList<>();
-        borders.add(new LineSegment(topLeft, topRight));
-        borders.add(new LineSegment(bottomLeft, bottomRight));
-        borders.add(new LineSegment(bottomLeft, bottomRight));
-        borders.add(new LineSegment(bottomLeft, bottomRight));
-
+        Point[] points = getPolygonPoints();
         double minSelectionDistance = Double.MAX_VALUE;
-        for (LineSegment border : borders) {
-            double selectionDistance = border.selectionDistance(mousePoint);
-            if (selectionDistance < minSelectionDistance)
+        for (Point point : points) {
+            double selectionDistance = GeometryUtil.distanceFromPoint(mousePoint, point);
+            if (selectionDistance < minSelectionDistance) {
                 minSelectionDistance = selectionDistance;
+            }
         }
         return minSelectionDistance;
     }
 
     @Override
     public void render(Renderer r) {
-        Point bottom = getHotPoint(BOTTOM);
-        Point right = getHotPoint(RIGHT);
-        Point diff = bottom.difference(right);
-
-        Point center = bottom.translate(new Point(0, -diff.getY()));
-        int radiusX = diff.getX();
-        int radiusY = diff.getY();
-
-        List<Point> points = new ArrayList<>();
-        for (double t = 0d; t < 2*Math.PI; t += 0.01) {
-            int x = (int) (radiusX * Math.cos(t));
-            int y = (int) (radiusY * Math.sin(t));
-
-            points.add(new Point(center.getX()+x, center.getY()-y));
-        }
-
-        r.fillPolygon(points.toArray(new Point[0]));
+        r.fillPolygon(getPolygonPoints());
     }
 
     @Override
@@ -109,5 +79,25 @@ public class Oval extends AbstractGraphicalObject {
     @Override
     public void save(List<String> rows) {
 
+    }
+
+    private Point[] getPolygonPoints() {
+        Point bottom = getHotPoint(BOTTOM);
+        Point right = getHotPoint(RIGHT);
+        Point diff = bottom.difference(right);
+
+        Point center = bottom.translate(new Point(0, -diff.getY()));
+        int radiusX = diff.getX();
+        int radiusY = diff.getY();
+
+        List<Point> points = new ArrayList<>();
+        for (double t = 0d; t < 2*Math.PI; t += 0.01) {
+            int x = (int) (radiusX * Math.cos(t));
+            int y = (int) (radiusY * Math.sin(t));
+
+            points.add(new Point(center.getX()+x, center.getY()-y));
+        }
+
+        return points.toArray(new Point[0]);
     }
 }
