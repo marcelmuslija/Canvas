@@ -1,5 +1,8 @@
 package graphics;
 
+import graphics.geometry.Point;
+import graphics.geometry.Rectangle;
+
 import java.util.List;
 import java.util.Stack;
 

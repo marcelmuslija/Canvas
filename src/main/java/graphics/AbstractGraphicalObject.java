@@ -1,5 +1,8 @@
 package graphics;
 
+import graphics.geometry.GeometryUtil;
+import graphics.geometry.Point;
+
 import java.util.ArrayList;
 import java.util.List;
 

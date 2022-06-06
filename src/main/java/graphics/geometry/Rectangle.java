@@ -1,4 +1,4 @@
-package graphics;
+package graphics.geometry;
 
 public class Rectangle {
     private int x;

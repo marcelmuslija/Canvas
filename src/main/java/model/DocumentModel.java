@@ -1,9 +1,8 @@
 package model;
 
-import graphics.GeometryUtil;
 import graphics.GraphicalObject;
 import graphics.GraphicalObjectListener;
-import graphics.Point;
+import graphics.geometry.Point;
 
 import java.util.ArrayList;
 import java.util.Collections;

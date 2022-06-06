@@ -1,5 +1,7 @@
 package graphics;
 
+import graphics.geometry.Point;
+
 public interface Renderer {
 
     void drawLine(Point s, Point e);

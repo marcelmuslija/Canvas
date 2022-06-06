@@ -1,4 +1,8 @@
-package graphics;
+package graphics.geometry;
+
+import graphics.AbstractGraphicalObject;
+import graphics.GraphicalObject;
+import graphics.Renderer;
 
 import java.util.List;
 import java.util.Stack;
