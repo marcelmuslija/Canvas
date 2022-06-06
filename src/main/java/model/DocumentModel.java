@@ -21,12 +21,17 @@ public class DocumentModel {
     private final GraphicalObjectListener goListener = new GraphicalObjectListener() {
         @Override
         public void graphicalObjectChanged(GraphicalObject go) {
-
+            notifyListeners();
         }
 
         @Override
         public void graphicalObjectSelectionChanged(GraphicalObject go) {
+            if (selectedObjects.contains(go))
+                selectedObjects.remove(go);
+            else
+                selectedObjects.add(go);
 
+            notifyListeners();
         }
     };
 
@@ -42,10 +47,12 @@ public class DocumentModel {
     }
 
     public void addGraphicalObject(GraphicalObject obj) {
+        obj.addGraphicalObjectListener(goListener);
         objects.add(obj);
     }
 
     public void removeGraphicalObject(GraphicalObject obj) {
+        obj.removeGraphicalObjectListener(goListener);
         objects.remove(obj);
     }
 
