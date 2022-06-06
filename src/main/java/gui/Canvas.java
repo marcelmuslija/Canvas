@@ -1,6 +1,7 @@
 package gui;
 
 import graphics.geometry.Point;
+import graphics.objects.GraphicalObject;
 import graphics.rendering.G2DRendererImpl;
 import graphics.rendering.Renderer;
 import model.DocumentModel;
@@ -28,7 +29,11 @@ public class Canvas extends JComponent {
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         Renderer r = new G2DRendererImpl(g2d);
-        model.list().forEach(go -> go.render(r));
+        for (GraphicalObject go : model.list()) {
+            go.render(r);
+            state.afterDraw(r, go);
+        }
+        state.afterDraw(r);
     }
 
     private final MouseListener mouseListener = new MouseInputAdapter() {
