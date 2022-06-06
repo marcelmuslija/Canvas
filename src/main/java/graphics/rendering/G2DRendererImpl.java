@@ -4,7 +4,6 @@ import graphics.geometry.Point;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Polygon;
 
 public class G2DRendererImpl implements Renderer {
     private final Graphics2D g2d;
