@@ -69,7 +69,7 @@ public class DocumentModel {
     }
 
     public void notifyListeners() {
-        listeners.forEach(l -> l.documentChange());
+        listeners.forEach(DocumentModelListener::documentChange);
     }
 
     public List<GraphicalObject> getSelectedObjects() {
