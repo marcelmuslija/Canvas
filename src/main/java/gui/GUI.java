@@ -5,6 +5,8 @@ import graphics.objects.LineSegment;
 import graphics.geometry.Point;
 import graphics.objects.Oval;
 import model.DocumentModel;
+import states.IdleState;
+import states.State;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -16,10 +18,12 @@ public class GUI extends JFrame {
 
     private final List<GraphicalObject> objects;
     private final DocumentModel model;
+    private State currentState;
 
     public GUI(List<GraphicalObject> objects) {
         this.objects = objects;
         this.model = new DocumentModel();
+        this.currentState = new IdleState();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(500, 500);
