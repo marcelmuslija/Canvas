@@ -22,6 +22,6 @@ public class Point {
     }
 
     public Point difference(Point p) {
-        return new Point(x - p.x, y - p.y);
+        return new Point(Math.abs(x - p.x), Math.abs(y - p.y));
     }
 }
