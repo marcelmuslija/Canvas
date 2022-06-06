@@ -10,7 +10,7 @@ import javax.swing.JComponent;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class Canvas extends JComponent {
     private final DocumentModel model;
@@ -19,6 +19,9 @@ public class Canvas extends JComponent {
     public Canvas(DocumentModel model) {
         this.model = model;
         model.addDocumentModelListener(this::repaint);
+
+        addMouseListener(mouseListener);
+        addKeyListener(keyListener);
     }
 
     @Override
@@ -28,7 +31,7 @@ public class Canvas extends JComponent {
         model.list().forEach(go -> go.render(r));
     }
 
-    private final MouseInputAdapter mouseListener = new MouseInputAdapter() {
+    private final MouseListener mouseListener = new MouseInputAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
             Point mousePoint = new Point(e.getX(), e.getY());
@@ -45,6 +48,13 @@ public class Canvas extends JComponent {
         public void mouseDragged(MouseEvent e) {
             Point mousePoint = new Point(e.getX(), e.getY());
             state.mouseDragged(mousePoint);
+        }
+    };
+
+    private final KeyListener keyListener = new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            state.keyPressed(e.getKeyCode());
         }
     };
 }
