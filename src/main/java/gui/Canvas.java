@@ -11,11 +11,10 @@ import java.awt.Graphics2D;
 
 public class Canvas extends JComponent {
     private final DocumentModel model;
-    private final DocumentModelListener modelListener = this::repaint;
-
+    
     public Canvas(DocumentModel model) {
         this.model = model;
-        model.addDocumentModelListener(modelListener);
+        model.addDocumentModelListener(this::repaint);
     }
 
     @Override
