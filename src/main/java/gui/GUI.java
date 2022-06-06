@@ -5,6 +5,7 @@ import graphics.objects.LineSegment;
 import graphics.geometry.Point;
 import graphics.objects.Oval;
 import model.DocumentModel;
+import states.AddShapeState;
 import states.IdleState;
 import states.State;
 
@@ -41,7 +42,7 @@ public class GUI extends JFrame {
             JButton goButton = new JButton(new AbstractAction(go.getShapeName()) {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    model.addGraphicalObject(go.duplicate());
+                    currentState = new AddShapeState(go, model);
                 }
             });
 
