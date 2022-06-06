@@ -63,7 +63,23 @@ public class Oval extends AbstractGraphicalObject {
 
     @Override
     public void render(Renderer r) {
+        Point bottom = getHotPoint(BOTTOM);
+        Point right = getHotPoint(RIGHT);
+        Point diff = bottom.difference(right);
 
+        Point center = bottom.translate(new Point(0, -diff.getY()));
+        int radiusX = diff.getX();
+        int radiusY = diff.getY();
+
+        List<Point> points = new ArrayList<>();
+        for (double t = 0d; t < 2*Math.PI; t += 0.01) {
+            int x = (int) (radiusX * Math.cos(t));
+            int y = (int) (radiusY * Math.sin(t));
+
+            points.add(new Point(center.getX()+x, center.getY()-y));
+        }
+
+        r.fillPolygon(points.toArray(new Point[0]));
     }
 
     @Override

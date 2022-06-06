@@ -3,6 +3,7 @@ package gui;
 import graphics.objects.GraphicalObject;
 import graphics.objects.LineSegment;
 import graphics.geometry.Point;
+import graphics.objects.Oval;
 import model.DocumentModel;
 
 import javax.swing.*;
@@ -49,7 +50,9 @@ public class GUI extends JFrame {
 
     public static void main(String[] args) {
         List<GraphicalObject> gos = List.of(
-                new LineSegment(new Point(100, 100), new Point(200, 200)));
+                new LineSegment(new Point(100, 100), new Point(100, 300)),
+                new Oval(new Point(250, 250), new Point(300, 225))
+        );
         SwingUtilities.invokeLater(() -> {
             new GUI(gos).setVisible(true);
         });
