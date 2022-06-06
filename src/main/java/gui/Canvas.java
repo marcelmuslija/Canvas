@@ -3,7 +3,6 @@ package gui;
 import graphics.rendering.G2DRendererImpl;
 import graphics.rendering.Renderer;
 import model.DocumentModel;
-import model.DocumentModelListener;
 
 import javax.swing.JComponent;
 import java.awt.Graphics;
@@ -11,7 +10,7 @@ import java.awt.Graphics2D;
 
 public class Canvas extends JComponent {
     private final DocumentModel model;
-    
+
     public Canvas(DocumentModel model) {
         this.model = model;
         model.addDocumentModelListener(this::repaint);
