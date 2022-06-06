@@ -2,6 +2,7 @@ package graphics;
 
 import graphics.geometry.Point;
 import graphics.geometry.Rectangle;
+import graphics.rendering.Renderer;
 
 import java.util.List;
 import java.util.Stack;

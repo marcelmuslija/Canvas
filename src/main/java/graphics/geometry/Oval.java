@@ -2,7 +2,7 @@ package graphics.geometry;
 
 import graphics.AbstractGraphicalObject;
 import graphics.GraphicalObject;
-import graphics.Renderer;
+import graphics.rendering.Renderer;
 
 import java.util.ArrayList;
 import java.util.List;
