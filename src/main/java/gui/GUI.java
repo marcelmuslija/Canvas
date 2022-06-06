@@ -3,6 +3,7 @@ package gui;
 import graphics.GraphicalObject;
 import graphics.geometry.LineSegment;
 import graphics.geometry.Oval;
+import model.DocumentModel;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class GUI extends JFrame {
 
-    private List<GraphicalObject> objects;
+    private final List<GraphicalObject> objects;
 
     public GUI(List<GraphicalObject> objects) {
         this.objects = objects;
@@ -27,7 +28,10 @@ public class GUI extends JFrame {
         JToolBar toolBar = new JToolBar();
         objects.forEach(go -> toolBar.add(new JButton(go.getShapeName())));
 
+        Canvas canvas = new Canvas(new DocumentModel());
+
         cp.add(toolBar, BorderLayout.PAGE_START);
+        cp.add(canvas, BorderLayout.CENTER);
     }
 
     public static void main(String[] args) {
