@@ -1,7 +1,7 @@
-package graphics.geometry;
+package graphics.objects;
 
-import graphics.AbstractGraphicalObject;
-import graphics.GraphicalObject;
+import graphics.geometry.Point;
+import graphics.geometry.Rectangle;
 import graphics.rendering.Renderer;
 
 import java.util.ArrayList;

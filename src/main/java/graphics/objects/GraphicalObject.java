@@ -1,4 +1,4 @@
-package graphics;
+package graphics.objects;
 
 import graphics.geometry.Point;
 import graphics.geometry.Rectangle;

@@ -1,4 +1,4 @@
-package graphics;
+package graphics.objects;
 
 import graphics.geometry.GeometryUtil;
 import graphics.geometry.Point;
@@ -15,6 +15,7 @@ public abstract class AbstractGraphicalObject implements GraphicalObject {
 
     protected AbstractGraphicalObject(Point[] hotPoints) {
         this.hotPoints = hotPoints;
+        hotPointSelected = new boolean[hotPoints.length];
     }
 
     @Override

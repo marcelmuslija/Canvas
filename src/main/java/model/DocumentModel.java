@@ -1,7 +1,7 @@
 package model;
 
-import graphics.GraphicalObject;
-import graphics.GraphicalObjectListener;
+import graphics.objects.GraphicalObject;
+import graphics.objects.GraphicalObjectListener;
 import graphics.geometry.Point;
 
 import java.util.ArrayList;
@@ -40,19 +40,20 @@ public class DocumentModel {
 
     public void clear() {
         for (GraphicalObject go : objects) {
-            go.removeGraphicalObjectListener(goListener);
-            objects.remove(go);
+            removeGraphicalObject(go);
         }
     }
 
     public void addGraphicalObject(GraphicalObject obj) {
         obj.addGraphicalObjectListener(goListener);
         objects.add(obj);
+        notifyListeners();
     }
 
     public void removeGraphicalObject(GraphicalObject obj) {
         obj.removeGraphicalObjectListener(goListener);
         objects.remove(obj);
+        notifyListeners();
     }
 
     public List<GraphicalObject> list() {
@@ -83,6 +84,8 @@ public class DocumentModel {
         GraphicalObject next = objects.get(index+1);
         objects.set(index, next);
         objects.set(index+1, go);
+
+        notifyListeners();
     }
 
     public void decreaseZ(GraphicalObject go) {
@@ -93,6 +96,8 @@ public class DocumentModel {
         GraphicalObject previous = objects.get(index-1);
         objects.set(index, previous);
         objects.set(index-1, go);
+
+        notifyListeners();
     }
 
     public GraphicalObject findSelectedGraphicalObject(Point mousePoint) {
