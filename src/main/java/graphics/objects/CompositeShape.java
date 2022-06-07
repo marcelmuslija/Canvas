@@ -11,11 +11,16 @@ import java.util.Stack;
 
 public class CompositeShape extends AbstractGraphicalObject {
 
-    private final List<GraphicalObject> objects;
+    private final List<GraphicalObject> objects = new ArrayList<>();
 
-    public CompositeShape() {
-        super(null);
-        objects = new ArrayList<>();
+    @Override
+    public int getNumberOfHotPoints() {
+        return 0;
+    }
+
+    @Override
+    public void translate(Point delta) {
+        objects.forEach(go -> go.translate(delta));
     }
 
     @Override
@@ -31,18 +36,20 @@ public class CompositeShape extends AbstractGraphicalObject {
             Rectangle boundingBox = go.getBoundingBox();
             int boundX = boundingBox.getX();
             int boundY = boundingBox.getY();
+            int boundWidth = boundingBox.getWidth();
+            int boundHeight = boundingBox.getHeight();
 
             if (boundX < leftMostX)
                 leftMostX = boundX;
 
-            if (boundX > rightMostX)
-                rightMostX = boundX;
+            if (boundX + boundWidth > rightMostX)
+                rightMostX = boundX + boundWidth;
 
             if (boundY < topMostY)
                 topMostY = boundY;
 
-            if (boundY > bottomMostY)
-                bottomMostY = boundY;
+            if (boundY + boundHeight > bottomMostY)
+                bottomMostY = boundY + boundHeight;
         }
 
         int x = leftMostX;
@@ -94,8 +101,8 @@ public class CompositeShape extends AbstractGraphicalObject {
     }
 
     @Override
-    public GraphicalObject getGraphicalObject(int index) {
-        return objects.get(index);
+    public List<GraphicalObject> getGraphicalObjects() {
+        return objects;
     }
 
     @Override

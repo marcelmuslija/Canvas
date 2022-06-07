@@ -30,7 +30,7 @@ public interface GraphicalObject {
     //composite pattern support
     void addGraphicalObject(GraphicalObject go);
     void removeGraphicalObject(GraphicalObject go);
-    GraphicalObject getGraphicalObject(int index);
+    List<GraphicalObject> getGraphicalObjects();
 
     //for publishing changes to the model
     void addGraphicalObjectListener(GraphicalObjectListener l);

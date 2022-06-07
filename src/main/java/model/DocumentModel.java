@@ -54,6 +54,7 @@ public class DocumentModel {
     public void removeGraphicalObject(GraphicalObject obj) {
         obj.removeGraphicalObjectListener(goListener);
         objects.remove(obj);
+        selectedObjects.remove(obj);
         notifyListeners();
     }
 

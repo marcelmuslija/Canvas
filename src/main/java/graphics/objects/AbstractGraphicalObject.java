@@ -7,11 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractGraphicalObject implements GraphicalObject {
-    private final Point[] hotPoints;
-    private final boolean[] hotPointSelected;
+    private Point[] hotPoints;
+    private boolean[] hotPointSelected;
     private boolean selected;
 
     protected List<GraphicalObjectListener> listeners = new ArrayList<>();
+
+    protected AbstractGraphicalObject() {
+    }
 
     protected AbstractGraphicalObject(Point[] hotPoints) {
         this.hotPoints = hotPoints;
@@ -66,6 +69,7 @@ public abstract class AbstractGraphicalObject implements GraphicalObject {
         for (int i = 0; i < hotPoints.length; i++) {
             hotPoints[i] = hotPoints[i].translate(delta);
         }
+        notifyListeners();
     }
 
     @Override
@@ -79,7 +83,7 @@ public abstract class AbstractGraphicalObject implements GraphicalObject {
     }
 
     @Override
-    public GraphicalObject getGraphicalObject(int index) {
+    public List<GraphicalObject> getGraphicalObjects() {
         throw new UnsupportedOperationException();
     }
 
