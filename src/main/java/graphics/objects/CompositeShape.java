@@ -131,6 +131,7 @@ public class CompositeShape extends AbstractGraphicalObject {
 
     @Override
     public void save(List<String> rows) {
-
+        objects.forEach(o -> o.save(rows));
+        rows.add(String.format("%s %d", getShapeID(), objects.size()));
     }
 }

@@ -66,6 +66,8 @@ public class LineSegment extends AbstractGraphicalObject {
 
     @Override
     public void save(List<String> rows) {
-
+        Point s = getHotPoint(START);
+        Point e = getHotPoint(END);
+        rows.add(String.format("%s %d %d %d %d", getShapeID(), s.getX(), s.getY(), e.getX(), e.getY()));
     }
 }

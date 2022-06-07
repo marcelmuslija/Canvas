@@ -94,7 +94,9 @@ public class Oval extends AbstractGraphicalObject {
 
     @Override
     public void save(List<String> rows) {
-
+        Point b = getHotPoint(BOTTOM);
+        Point r = getHotPoint(RIGHT);
+        rows.add(String.format("%s %d %d %d %d", getShapeID(), r.getX(), r.getY(), b.getX(), b.getY()));
     }
 
     private Point[] getPolygonPoints() {
