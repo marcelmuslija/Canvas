@@ -13,38 +13,46 @@ public class Oval extends AbstractGraphicalObject {
     private static final int FIRST = 0;
     private static final int SECOND = 1;
 
+    private Point center;
+
     public Oval() {
         this(new Point(0, 10), new Point(10, 0));
     }
 
-    public Oval(Point first, Point second) {
-        super(new Point[] {first, second});
+    public Oval(Point bottom, Point right) {
+        super(new Point[] {bottom, right});
+        center = new Point(bottom.getX(), right.getY());
     }
 
     @Override
     public Rectangle getBoundingBox() {
-        Point first = getHotPoint(FIRST);
-        Point second = getHotPoint(SECOND);
-        Point diff = first.difference(second);
 
-        int x = first.getX() - diff.getX();
-        int y = second.getY() - diff.getY();
-        int width = 2*diff.getX();
-        int height = 2*diff.getY();
-        return new Rectangle(x, y, width, height);
     }
 
     @Override
     public double selectionDistance(Point mousePoint) {
-        Point[] points = getPolygonPoints();
-        double minSelectionDistance = Double.MAX_VALUE;
-        for (Point point : points) {
-            double selectionDistance = GeometryUtil.distanceFromPoint(mousePoint, point);
-            if (selectionDistance < minSelectionDistance) {
-                minSelectionDistance = selectionDistance;
-            }
-        }
-        return minSelectionDistance;
+        Rectangle boundingBox = getBoundingBox();
+        int mouseX = mousePoint.getX();
+        int mouseY = mousePoint.getY();
+        int x = boundingBox.getX();
+        int y = boundingBox.getY();
+        int width = boundingBox.getWidth();
+        int height = boundingBox.getHeight();
+
+        if (mouseX >= x && mouseX <= x+width && mouseY >= y && mouseY <= y+height)
+            return 0.0d;
+
+        Point topLeft = new Point(x, y);
+        Point topRight = new Point(x+width, y);
+        Point bottomLeft = new Point(x, y+height);
+        Point bottomRight = new Point(x+width, y+height);
+
+        double d1 = GeometryUtil.distanceFromLineSegment(topLeft, topRight, mousePoint);
+        double d2 = GeometryUtil.distanceFromLineSegment(topLeft, bottomLeft, mousePoint);
+        double d3 = GeometryUtil.distanceFromLineSegment(bottomLeft, bottomRight, mousePoint);
+        double d4 = GeometryUtil.distanceFromLineSegment(topRight, bottomRight, mousePoint);
+
+        return Math.min(d1, Math.min(d2, Math.min(d3, d4)));
     }
 
     @Override
@@ -59,11 +67,7 @@ public class Oval extends AbstractGraphicalObject {
 
     @Override
     public GraphicalObject duplicate() {
-        Oval duplicate = new Oval(getHotPoint(FIRST), getHotPoint(SECOND));
-        duplicate.setSelected(isSelected());
-        duplicate.setHotPointSelected(FIRST, isHotPointSelected(FIRST));
-        duplicate.setHotPointSelected(SECOND, isHotPointSelected(SECOND));
-        return duplicate;
+        return new Oval(getHotPoint(FIRST), getHotPoint(SECOND));
     }
 
     @Override

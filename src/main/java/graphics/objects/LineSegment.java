@@ -51,11 +51,7 @@ public class LineSegment extends AbstractGraphicalObject {
 
     @Override
     public GraphicalObject duplicate() {
-        LineSegment duplicate = new LineSegment(getHotPoint(START), getHotPoint(END));
-        duplicate.setSelected(isSelected());
-        duplicate.setHotPointSelected(START, isHotPointSelected(START));
-        duplicate.setHotPointSelected(END, isHotPointSelected(END));
-        return duplicate;
+        return new LineSegment(getHotPoint(START), getHotPoint(END));
     }
 
     @Override
