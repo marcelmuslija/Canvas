@@ -7,8 +7,8 @@ import model.DocumentModel;
 
 public class AddShapeState implements State {
 
-    private GraphicalObject prototype;
-    private DocumentModel model;
+    private final GraphicalObject prototype;
+    private final DocumentModel model;
 
     public AddShapeState(GraphicalObject prototype, DocumentModel model) {
         this.prototype = prototype;

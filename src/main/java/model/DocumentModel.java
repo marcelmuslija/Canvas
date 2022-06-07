@@ -11,11 +11,11 @@ import java.util.List;
 public class DocumentModel {
     public final static double SELECTION_PROXIMITY = 10d;
 
-    private List<GraphicalObject> objects = new ArrayList<>();
-    private List<GraphicalObject> roObjects = Collections.unmodifiableList(objects);
-    private List<DocumentModelListener> listeners = new ArrayList<>();
-    private List<GraphicalObject> selectedObjects = new ArrayList<>();
-    private List<GraphicalObject> roSelectedObjects = Collections.unmodifiableList(selectedObjects);
+    private final List<GraphicalObject> objects = new ArrayList<>();
+    private final List<GraphicalObject> roObjects = Collections.unmodifiableList(objects);
+    private final List<DocumentModelListener> listeners = new ArrayList<>();
+    private final List<GraphicalObject> selectedObjects = new ArrayList<>();
+    private final List<GraphicalObject> roSelectedObjects = Collections.unmodifiableList(selectedObjects);
 
     private final GraphicalObjectListener goListener = new GraphicalObjectListener() {
         @Override
@@ -25,10 +25,11 @@ public class DocumentModel {
 
         @Override
         public void graphicalObjectSelectionChanged(GraphicalObject go) {
-            if (selectedObjects.contains(go))
-                selectedObjects.remove(go);
-            else
+            if (go.isSelected()) {
                 selectedObjects.add(go);
+            } else {
+                selectedObjects.remove(go);
+            }
 
             notifyListeners();
         }

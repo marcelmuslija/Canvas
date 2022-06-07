@@ -5,7 +5,6 @@ import graphics.objects.GraphicalObject;
 import graphics.rendering.G2DRendererImpl;
 import graphics.rendering.Renderer;
 import model.DocumentModel;
-import states.State;
 
 import javax.swing.JComponent;
 import javax.swing.event.MouseInputAdapter;
@@ -15,12 +14,13 @@ import java.awt.event.*;
 
 public class Canvas extends JComponent {
     private final DocumentModel model;
-    private State state;
+    private final GUI window;
 
-    public Canvas(DocumentModel model) {
+    public Canvas(DocumentModel model, GUI window) {
         this.model = model;
-        model.addDocumentModelListener(this::repaint);
+        this.window = window;
 
+        model.addDocumentModelListener(this::repaint);
         addMouseListener(mouseListener);
         addKeyListener(keyListener);
     }
@@ -31,35 +31,35 @@ public class Canvas extends JComponent {
         Renderer r = new G2DRendererImpl(g2d);
         for (GraphicalObject go : model.list()) {
             go.render(r);
-            state.afterDraw(r, go);
+            window.getCurrentState().afterDraw(r, go);
         }
-        state.afterDraw(r);
+        window.getCurrentState().afterDraw(r);
     }
 
     private final MouseListener mouseListener = new MouseInputAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
             Point mousePoint = new Point(e.getX(), e.getY());
-            state.mouseDown(mousePoint, e.isShiftDown(), e.isControlDown());
+            window.getCurrentState().mouseDown(mousePoint, e.isShiftDown(), e.isControlDown());
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
             Point mousePoint = new Point(e.getX(), e.getY());
-            state.mouseUp(mousePoint, e.isShiftDown(), e.isControlDown());
+            window.getCurrentState().mouseUp(mousePoint, e.isShiftDown(), e.isControlDown());
         }
 
         @Override
         public void mouseDragged(MouseEvent e) {
             Point mousePoint = new Point(e.getX(), e.getY());
-            state.mouseDragged(mousePoint);
+            window.getCurrentState().mouseDragged(mousePoint);
         }
     };
 
     private final KeyListener keyListener = new KeyAdapter() {
         @Override
         public void keyPressed(KeyEvent e) {
-            state.keyPressed(e.getKeyCode());
+            window.getCurrentState().keyPressed(e.getKeyCode());
         }
     };
 }

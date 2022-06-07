@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractGraphicalObject implements GraphicalObject {
-    private Point[] hotPoints;
-    private boolean[] hotPointSelected;
+    private final Point[] hotPoints;
+    private final boolean[] hotPointSelected;
     private boolean selected;
 
     protected List<GraphicalObjectListener> listeners = new ArrayList<>();

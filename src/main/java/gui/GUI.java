@@ -6,6 +6,7 @@ import graphics.objects.Oval;
 import model.DocumentModel;
 import states.AddShapeState;
 import states.IdleState;
+import states.SelectShapeState;
 import states.State;
 
 import javax.swing.*;
@@ -34,7 +35,7 @@ public class GUI extends JFrame {
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
 
-        Canvas canvas = new Canvas(model);
+        Canvas canvas = new Canvas(model, this);
 
         JToolBar toolBar = new JToolBar();
         for (GraphicalObject go : objects) {
@@ -48,8 +49,20 @@ public class GUI extends JFrame {
             toolBar.add(goButton);
         }
 
+        JButton selectButton = new JButton(new AbstractAction("Selektiraj") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentState = new SelectShapeState(model);
+            }
+        });
+        toolBar.add(selectButton);
+
         cp.add(toolBar, BorderLayout.PAGE_START);
         cp.add(canvas, BorderLayout.CENTER);
+    }
+
+    public State getCurrentState() {
+        return currentState;
     }
 
     public static void main(String[] args) {

@@ -28,7 +28,7 @@ public class Oval extends AbstractGraphicalObject {
         Point diff = bottom.difference(right);
 
         int x = bottom.getX() - diff.getX();
-        int y = right.getY() + diff.getY();
+        int y = right.getY() - diff.getY();
         int width = 2*diff.getX();
         int height = 2*diff.getY();
         return new Rectangle(x, y, width, height);
