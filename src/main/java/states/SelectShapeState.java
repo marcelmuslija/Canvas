@@ -36,6 +36,12 @@ public class SelectShapeState implements State {
 
     @Override
     public void mouseDragged(Point mousePoint) {
+        GraphicalObject selected = model.findSelectedGraphicalObject(mousePoint);
+        if (selected == null)
+            return;
+
+        int selectedHotPointIndex = model.findSelectedHotPoint(selected, mousePoint);
+        selected.setHotPoint(selectedHotPointIndex, mousePoint);
     }
 
     @Override

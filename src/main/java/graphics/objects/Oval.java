@@ -13,7 +13,6 @@ public class Oval extends AbstractGraphicalObject {
     private static final int FIRST = 0;
     private static final int SECOND = 1;
 
-    private Point center;
 
     public Oval() {
         this(new Point(0, 10), new Point(10, 0));
@@ -21,12 +20,11 @@ public class Oval extends AbstractGraphicalObject {
 
     public Oval(Point bottom, Point right) {
         super(new Point[] {bottom, right});
-        center = new Point(bottom.getX(), right.getY());
     }
 
     @Override
     public Rectangle getBoundingBox() {
-
+        return null;
     }
 
     @Override
