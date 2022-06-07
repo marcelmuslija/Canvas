@@ -68,36 +68,17 @@ public class GUI extends JFrame {
         JButton svgExportButton = new JButton(new AbstractAction("SVG Export") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setDialogTitle("SVG Export");
-                if (fileChooser.showSaveDialog(GUI.this) != JFileChooser.APPROVE_OPTION) {
-                    JOptionPane.showMessageDialog(
-                            GUI.this,
-                            "Neuspješno stvaranje SVG datoteke!",
-                            "Upozorenje",
-                            JOptionPane.WARNING_MESSAGE
-                    );
+                String filename = askFilename();
+                if (filename == null)
                     return;
-                }
-                String filename = fileChooser.getSelectedFile().toPath().toAbsolutePath().toString();
+
                 SVGRendererImpl r = new SVGRendererImpl(filename);
                 model.list().forEach(go -> go.render(r));
                 try {
                     r.close();
-                    JOptionPane.showMessageDialog(
-                            GUI.this,
-                            "Datoteka spremljena!",
-                            "Uspjeh",
-                            JOptionPane.INFORMATION_MESSAGE
-                    );
+                    showSuccess();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(
-                            GUI.this,
-                            "Pogreška prilikom spremanja SVG datoteke!" + filename + ".\n" +
-                                    "Upozorenje: datoteka je u nekonzistentnom stanju!",
-                            "Pogreška",
-                            JOptionPane.ERROR_MESSAGE
-                    );
+                    showError(filename);
                 }
             }
         });
@@ -114,6 +95,40 @@ public class GUI extends JFrame {
     public void setCurrentState(State state) {
         currentState.onLeaving();
         currentState = state;
+    }
+
+    private String askFilename() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("SVG Export");
+        if (fileChooser.showSaveDialog(GUI.this) != JFileChooser.APPROVE_OPTION) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Neuspješno stvaranje SVG datoteke!",
+                    "Upozorenje",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return null;
+        }
+        return fileChooser.getSelectedFile().toPath().toAbsolutePath().toString();
+    }
+
+    private void showSuccess() {
+        JOptionPane.showMessageDialog(
+                GUI.this,
+                "Datoteka spremljena!",
+                "Uspjeh",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+    private void showError(String filename) {
+        JOptionPane.showMessageDialog(
+                GUI.this,
+                "Pogreška prilikom spremanja datoteke " + filename + ".\n" +
+                        "Upozorenje: datoteka je u nekonzistentnom stanju!",
+                "Pogreška",
+                JOptionPane.ERROR_MESSAGE
+        );
     }
 
 
