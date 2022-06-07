@@ -24,6 +24,7 @@ public class Canvas extends JComponent {
         addMouseListener(mouseListener);
         addMouseMotionListener(mouseListener);
         addKeyListener(keyListener);
+        setFocusable(true);
     }
 
     @Override
@@ -40,6 +41,7 @@ public class Canvas extends JComponent {
     private final MouseInputAdapter mouseListener = new MouseInputAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
+            requestFocusInWindow();
             Point mousePoint = new Point(e.getX(), e.getY());
             window.getCurrentState().mouseDown(mousePoint, e.isShiftDown(), e.isControlDown());
         }

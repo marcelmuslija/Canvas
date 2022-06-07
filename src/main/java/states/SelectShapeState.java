@@ -6,6 +6,7 @@ import graphics.objects.GraphicalObject;
 import graphics.rendering.Renderer;
 import model.DocumentModel;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +48,21 @@ public class SelectShapeState implements State {
 
     @Override
     public void keyPressed(int keyCode) {
+        Point translation = switch (keyCode) {
+            case KeyEvent.VK_UP -> new Point(0, -1);
+            case KeyEvent.VK_DOWN -> new Point(0, 1);
+            case KeyEvent.VK_LEFT -> new Point(-1, 0);
+            case KeyEvent.VK_RIGHT -> new Point(1, 0);
+            default -> new Point(0, 0);
+        };
 
+        model.getSelectedObjects().forEach(go -> {
+            int numberOfHotPoints = go.getNumberOfHotPoints();
+            for (int i = 0; i < numberOfHotPoints; i++) {
+                Point hotPoint = go.getHotPoint(i);
+                go.setHotPoint(i, hotPoint.translate(translation));
+            }
+        });
     }
 
     @Override
