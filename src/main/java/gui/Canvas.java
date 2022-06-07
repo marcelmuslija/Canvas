@@ -22,6 +22,7 @@ public class Canvas extends JComponent {
 
         model.addDocumentModelListener(this::repaint);
         addMouseListener(mouseListener);
+        addMouseMotionListener(mouseListener);
         addKeyListener(keyListener);
     }
 
@@ -36,7 +37,7 @@ public class Canvas extends JComponent {
         window.getCurrentState().afterDraw(r);
     }
 
-    private final MouseListener mouseListener = new MouseInputAdapter() {
+    private final MouseInputAdapter mouseListener = new MouseInputAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
             Point mousePoint = new Point(e.getX(), e.getY());

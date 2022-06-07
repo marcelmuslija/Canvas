@@ -10,25 +10,25 @@ import java.util.List;
 import java.util.Stack;
 
 public class Oval extends AbstractGraphicalObject {
-    private static final int BOTTOM = 0;
-    private static final int RIGHT = 1;
+    private static final int FIRST = 0;
+    private static final int SECOND = 1;
 
     public Oval() {
         this(new Point(0, 10), new Point(10, 0));
     }
 
-    public Oval(Point bottom, Point right) {
-        super(new Point[] {bottom, right});
+    public Oval(Point first, Point second) {
+        super(new Point[] {first, second});
     }
 
     @Override
     public Rectangle getBoundingBox() {
-        Point bottom = getHotPoint(BOTTOM);
-        Point right = getHotPoint(RIGHT);
-        Point diff = bottom.difference(right);
+        Point first = getHotPoint(FIRST);
+        Point second = getHotPoint(SECOND);
+        Point diff = first.difference(second);
 
-        int x = bottom.getX() - diff.getX();
-        int y = right.getY() - diff.getY();
+        int x = first.getX() - diff.getX();
+        int y = second.getY() - diff.getY();
         int width = 2*diff.getX();
         int height = 2*diff.getY();
         return new Rectangle(x, y, width, height);
@@ -59,10 +59,10 @@ public class Oval extends AbstractGraphicalObject {
 
     @Override
     public GraphicalObject duplicate() {
-        Oval duplicate = new Oval(getHotPoint(BOTTOM), getHotPoint(RIGHT));
+        Oval duplicate = new Oval(getHotPoint(FIRST), getHotPoint(SECOND));
         duplicate.setSelected(isSelected());
-        duplicate.setHotPointSelected(BOTTOM, isHotPointSelected(BOTTOM));
-        duplicate.setHotPointSelected(RIGHT, isHotPointSelected(RIGHT));
+        duplicate.setHotPointSelected(FIRST, isHotPointSelected(FIRST));
+        duplicate.setHotPointSelected(SECOND, isHotPointSelected(SECOND));
         return duplicate;
     }
 
@@ -82,11 +82,11 @@ public class Oval extends AbstractGraphicalObject {
     }
 
     private Point[] getPolygonPoints() {
-        Point bottom = getHotPoint(BOTTOM);
-        Point right = getHotPoint(RIGHT);
-        Point diff = bottom.difference(right);
+        Point first = getHotPoint(FIRST);
+        Point second = getHotPoint(SECOND);
+        Point diff = first.difference(second);
 
-        Point center = bottom.translate(new Point(0, -diff.getY()));
+        Point center = first.translate(new Point(0, -diff.getY()));
         int radiusX = diff.getX();
         int radiusY = diff.getY();
 
