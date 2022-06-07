@@ -42,7 +42,7 @@ public class GUI extends JFrame {
             JButton goButton = new JButton(new AbstractAction(go.getShapeName()) {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    currentState = new AddShapeState(go, model);
+                    setCurrentState(new AddShapeState(go, model));
                 }
             });
 
@@ -63,6 +63,11 @@ public class GUI extends JFrame {
 
     public State getCurrentState() {
         return currentState;
+    }
+
+    public void setCurrentState(State state) {
+        currentState.onLeaving();
+        currentState = state;
     }
 
     public static void main(String[] args) {

@@ -69,6 +69,21 @@ public abstract class AbstractGraphicalObject implements GraphicalObject {
     }
 
     @Override
+    public void addGraphicalObject(GraphicalObject go) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void removeGraphicalObject(GraphicalObject go) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public GraphicalObject getGraphicalObject(int index) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void addGraphicalObjectListener(GraphicalObjectListener l) {
         listeners.add(l);
     }

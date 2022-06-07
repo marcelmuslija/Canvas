@@ -28,10 +28,10 @@ public class G2DRendererImpl implements Renderer {
             yPoints[i] = points[i].getY();
         }
 
-        g2d.setColor(Color.BLUE);
+        g2d.setColor(Color.MAGENTA);
         g2d.fillPolygon(xPoints, yPoints, points.length);
 
-        g2d.setColor(Color.RED);
+        g2d.setColor(Color.BLACK);
         g2d.drawPolygon(xPoints, yPoints, points.length);
     }
 }

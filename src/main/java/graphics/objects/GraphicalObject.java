@@ -27,6 +27,11 @@ public interface GraphicalObject {
     //drawing support
     void render(Renderer r);
 
+    //composite pattern support
+    void addGraphicalObject(GraphicalObject go);
+    void removeGraphicalObject(GraphicalObject go);
+    GraphicalObject getGraphicalObject(int index);
+
     //for publishing changes to the model
     void addGraphicalObjectListener(GraphicalObjectListener l);
     void removeGraphicalObjectListener(GraphicalObjectListener l);
