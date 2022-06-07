@@ -5,6 +5,7 @@ import graphics.rendering.Renderer;
 import graphics.util.Point;
 
 public class EraserState implements State {
+
     @Override
     public void mouseDown(Point mousePoint, boolean shiftDown, boolean ctrlDown) {
 

@@ -4,10 +4,7 @@ import graphics.objects.GraphicalObject;
 import graphics.objects.LineSegment;
 import graphics.objects.Oval;
 import model.DocumentModel;
-import states.AddShapeState;
-import states.IdleState;
-import states.SelectShapeState;
-import states.State;
+import states.*;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -56,6 +53,14 @@ public class GUI extends JFrame {
             }
         });
         toolBar.add(selectButton);
+
+        JButton eraseButton = new JButton(new AbstractAction("Brisalo") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setCurrentState(new EraserState());
+            }
+        });
+        toolBar.add(eraseButton);
 
         cp.add(toolBar, BorderLayout.PAGE_START);
         cp.add(canvas, BorderLayout.CENTER);
