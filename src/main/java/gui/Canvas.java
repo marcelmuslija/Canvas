@@ -1,6 +1,6 @@
 package gui;
 
-import graphics.geometry.Point;
+import graphics.util.Point;
 import graphics.objects.GraphicalObject;
 import graphics.rendering.G2DRendererImpl;
 import graphics.rendering.Renderer;

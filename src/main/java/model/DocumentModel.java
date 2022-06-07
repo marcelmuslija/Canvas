@@ -2,7 +2,7 @@ package model;
 
 import graphics.objects.GraphicalObject;
 import graphics.objects.GraphicalObjectListener;
-import graphics.geometry.Point;
+import graphics.util.Point;
 
 import java.util.ArrayList;
 import java.util.Collections;

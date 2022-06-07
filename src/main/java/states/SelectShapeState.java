@@ -1,7 +1,7 @@
 package states;
 
-import graphics.geometry.Point;
-import graphics.geometry.Rectangle;
+import graphics.util.Point;
+import graphics.util.Rectangle;
 import graphics.objects.GraphicalObject;
 import graphics.rendering.Renderer;
 import model.DocumentModel;
@@ -41,7 +41,8 @@ public class SelectShapeState implements State {
             return;
 
         int selectedHotPointIndex = model.findSelectedHotPoint(selected, mousePoint);
-        selected.setHotPoint(selectedHotPointIndex, mousePoint);
+        if (selectedHotPointIndex >= 0)
+            selected.setHotPoint(selectedHotPointIndex, mousePoint);
     }
 
     @Override

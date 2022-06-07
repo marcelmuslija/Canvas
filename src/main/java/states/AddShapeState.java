@@ -1,6 +1,6 @@
 package states;
 
-import graphics.geometry.Point;
+import graphics.util.Point;
 import graphics.objects.GraphicalObject;
 import graphics.rendering.Renderer;
 import model.DocumentModel;

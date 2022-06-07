@@ -1,4 +1,4 @@
-package graphics.geometry;
+package graphics.util;
 
 public class Point {
     private int x;

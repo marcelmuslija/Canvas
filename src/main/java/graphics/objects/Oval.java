@@ -1,8 +1,8 @@
 package graphics.objects;
 
-import graphics.geometry.GeometryUtil;
-import graphics.geometry.Point;
-import graphics.geometry.Rectangle;
+import graphics.util.GeometryUtil;
+import graphics.util.Point;
+import graphics.util.Rectangle;
 import graphics.rendering.Renderer;
 
 import java.util.ArrayList;

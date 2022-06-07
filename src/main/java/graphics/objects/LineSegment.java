@@ -1,8 +1,8 @@
 package graphics.objects;
 
-import graphics.geometry.GeometryUtil;
-import graphics.geometry.Point;
-import graphics.geometry.Rectangle;
+import graphics.util.GeometryUtil;
+import graphics.util.Point;
+import graphics.util.Rectangle;
 import graphics.rendering.Renderer;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class LineSegment extends AbstractGraphicalObject {
         Point diff = s.difference(e);
 
         int x = Math.min(s.getX(), e.getX());
-        int y = Math.max(s.getY(), e.getY());
+        int y = Math.min(s.getY(), e.getY());
         int width = diff.getX();
         int height = diff.getY();
 

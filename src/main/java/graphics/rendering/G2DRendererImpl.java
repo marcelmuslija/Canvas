@@ -1,6 +1,6 @@
 package graphics.rendering;
 
-import graphics.geometry.Point;
+import graphics.util.Point;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
