@@ -1,15 +1,13 @@
 package graphics.objects;
 
+import graphics.rendering.Renderer;
 import graphics.util.GeometryUtil;
 import graphics.util.Point;
 import graphics.util.Rectangle;
-import graphics.rendering.Renderer;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LineSegment extends AbstractGraphicalObject {
     private static final int START = 0;
