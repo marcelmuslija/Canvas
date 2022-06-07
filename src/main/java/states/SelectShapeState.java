@@ -48,21 +48,42 @@ public class SelectShapeState implements State {
 
     @Override
     public void keyPressed(int keyCode) {
-        Point translation = switch (keyCode) {
-            case KeyEvent.VK_UP -> new Point(0, -1);
-            case KeyEvent.VK_DOWN -> new Point(0, 1);
-            case KeyEvent.VK_LEFT -> new Point(-1, 0);
-            case KeyEvent.VK_RIGHT -> new Point(1, 0);
-            default -> new Point(0, 0);
+        switch (keyCode) {
+            case KeyEvent.VK_UP -> translate(new Point(0, -1));
+            case KeyEvent.VK_DOWN -> translate(new Point(0, 1));
+            case KeyEvent.VK_LEFT -> translate(new Point(-1, 0));
+            case KeyEvent.VK_RIGHT -> translate(new Point(1, 0));
+            case KeyEvent.VK_PLUS, KeyEvent.VK_ADD -> moveCloser();
+            case KeyEvent.VK_MINUS, KeyEvent.VK_SUBTRACT -> moveFurther();
         };
+    }
 
+    private void translate(Point delta) {
         model.getSelectedObjects().forEach(go -> {
             int numberOfHotPoints = go.getNumberOfHotPoints();
             for (int i = 0; i < numberOfHotPoints; i++) {
                 Point hotPoint = go.getHotPoint(i);
-                go.setHotPoint(i, hotPoint.translate(translation));
+                go.setHotPoint(i, hotPoint.translate(delta));
             }
         });
+    }
+
+    private void moveCloser() {
+        List<GraphicalObject> selectedObjects = model.getSelectedObjects();
+        if (selectedObjects.size() != 1)
+            return;
+
+        GraphicalObject go = selectedObjects.get(0);
+        model.increaseZ(go);
+    }
+
+    private void moveFurther() {
+        List<GraphicalObject> selectedObjects = model.getSelectedObjects();
+        if (selectedObjects.size() != 1)
+            return;
+
+        GraphicalObject go = selectedObjects.get(0);
+        model.decreaseZ(go);
     }
 
     @Override
@@ -116,6 +137,7 @@ public class SelectShapeState implements State {
 
     @Override
     public void onLeaving() {
-
+        List<GraphicalObject> unselect = new ArrayList<>(model.getSelectedObjects());
+        unselect.forEach(go -> go.setSelected(false));
     }
 }

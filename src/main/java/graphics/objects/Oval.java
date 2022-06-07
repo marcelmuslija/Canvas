@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Stack;
 
 public class Oval extends AbstractGraphicalObject {
-    private static final int FIRST = 0;
-    private static final int SECOND = 1;
+    private static final int BOTTOM = 0;
+    private static final int RIGHT = 1;
 
 
     public Oval() {
@@ -23,8 +23,22 @@ public class Oval extends AbstractGraphicalObject {
     }
 
     @Override
+    public void setHotPoint(int index, Point point) {
+        super.setHotPoint(index, point);
+    }
+
+    @Override
     public Rectangle getBoundingBox() {
-        return null;
+        Point bottom = getHotPoint(BOTTOM);
+        Point right = getHotPoint(RIGHT);
+        Point diff = bottom.difference(right);
+
+        int x = bottom.getX() - diff.getX();
+        int y = right.getY() - diff.getY();
+        int width = 2*diff.getX();
+        int height = 2*diff.getY();
+
+        return new Rectangle(x, y, width, height);
     }
 
     @Override
@@ -65,7 +79,7 @@ public class Oval extends AbstractGraphicalObject {
 
     @Override
     public GraphicalObject duplicate() {
-        return new Oval(getHotPoint(FIRST), getHotPoint(SECOND));
+        return new Oval(getHotPoint(BOTTOM), getHotPoint(RIGHT));
     }
 
     @Override
@@ -84,11 +98,11 @@ public class Oval extends AbstractGraphicalObject {
     }
 
     private Point[] getPolygonPoints() {
-        Point first = getHotPoint(FIRST);
-        Point second = getHotPoint(SECOND);
-        Point diff = first.difference(second);
+        Point bottom = getHotPoint(BOTTOM);
+        Point right = getHotPoint(RIGHT);
+        Point diff = bottom.difference(right);
 
-        Point center = first.translate(new Point(0, -diff.getY()));
+        Point center = bottom.translate(new Point(0, -diff.getY()));
         int radiusX = diff.getX();
         int radiusY = diff.getY();
 
