@@ -5,6 +5,7 @@ import graphics.objects.GraphicalObject;
 import graphics.rendering.G2DRendererImpl;
 import graphics.rendering.Renderer;
 import model.DocumentModel;
+import states.IdleState;
 
 import javax.swing.JComponent;
 import javax.swing.event.MouseInputAdapter;
@@ -62,6 +63,10 @@ public class Canvas extends JComponent {
     private final KeyListener keyListener = new KeyAdapter() {
         @Override
         public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                window.setCurrentState(new IdleState());
+                return;
+            }
             window.getCurrentState().keyPressed(e.getKeyCode());
         }
     };

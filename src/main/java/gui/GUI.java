@@ -49,7 +49,7 @@ public class GUI extends JFrame {
         JButton selectButton = new JButton(new AbstractAction("Selektiraj") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                currentState = new SelectShapeState(model);
+                setCurrentState(new SelectShapeState(model));
             }
         });
         toolBar.add(selectButton);
@@ -57,7 +57,7 @@ public class GUI extends JFrame {
         JButton eraseButton = new JButton(new AbstractAction("Brisalo") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setCurrentState(new EraserState());
+                setCurrentState(new EraserState(model));
             }
         });
         toolBar.add(eraseButton);

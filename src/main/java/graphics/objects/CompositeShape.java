@@ -93,11 +93,13 @@ public class CompositeShape extends AbstractGraphicalObject {
     @Override
     public void addGraphicalObject(GraphicalObject go) {
         objects.add(go);
+        notifyListeners();
     }
 
     @Override
     public void removeGraphicalObject(GraphicalObject go) {
         objects.remove(go);
+        notifyListeners();
     }
 
     @Override
