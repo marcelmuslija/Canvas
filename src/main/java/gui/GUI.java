@@ -37,6 +37,7 @@ public class GUI extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(500, 500);
+        setTitle("Canvas");
         initGUI();
     }
 
