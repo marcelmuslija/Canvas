@@ -121,7 +121,7 @@ public class CompositeShape extends AbstractGraphicalObject {
 
     @Override
     public String getShapeID() {
-        return null;
+        return "@COMP";
     }
 
     @Override

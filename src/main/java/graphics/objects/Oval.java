@@ -84,7 +84,7 @@ public class Oval extends AbstractGraphicalObject {
 
     @Override
     public String getShapeID() {
-        return null;
+        return "@OVAL";
     }
 
     @Override

@@ -3,6 +3,8 @@ package graphics.rendering;
 import graphics.util.Point;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +20,12 @@ public class SVGRendererImpl implements Renderer {
 
     public void close() throws IOException {
         lines.add("</svg>");
+        Files.writeString(Path.of(filename), String.join("\n", lines));
     }
 
     @Override
     public void drawLine(Point s, Point e) {
-        lines.add(String.format("<Line x1=\"%d\" y1=\"%d\" x2=\"%d\"   y2=\"%d\" style=\"stroke:#0000ff;\"/>",
+        lines.add(String.format("<line x1=\"%d\" y1=\"%d\" x2=\"%d\"   y2=\"%d\" style=\"stroke:#0000ff;\"/>",
                 s.getX(),
                 s.getY(),
                 e.getX(),
@@ -33,7 +36,7 @@ public class SVGRendererImpl implements Renderer {
     public void fillPolygon(Point[] points) {
         StringBuilder polygonTagBuilder = new StringBuilder("<polygon points=\"");
         for (Point point : points) {
-            polygonTagBuilder.append(point.getX()).append(",").append(point.getY());
+            polygonTagBuilder.append(point.getX()).append(",").append(point.getY()).append(" ");
         }
         polygonTagBuilder.append("\" style=\"stroke:#ff0000; fill:#ff00ff;\"/>");
         lines.add(polygonTagBuilder.toString());

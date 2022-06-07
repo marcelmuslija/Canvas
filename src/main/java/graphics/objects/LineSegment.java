@@ -56,7 +56,7 @@ public class LineSegment extends AbstractGraphicalObject {
 
     @Override
     public String getShapeID() {
-        return null;
+        return "@LINE";
     }
 
     @Override
