@@ -126,7 +126,12 @@ public class CompositeShape extends AbstractGraphicalObject {
 
     @Override
     public void load(Stack<GraphicalObject> stack, String data) {
-
+        GraphicalObject composite = new CompositeShape();
+        int goCount = Integer.parseInt(data);
+        while (goCount-- > 0) {
+            composite.addGraphicalObject(stack.pop());
+        }
+        stack.push(composite);
     }
 
     @Override

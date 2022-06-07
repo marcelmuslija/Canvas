@@ -6,6 +6,7 @@ import graphics.util.Rectangle;
 import graphics.rendering.Renderer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -89,7 +90,12 @@ public class Oval extends AbstractGraphicalObject {
 
     @Override
     public void load(Stack<GraphicalObject> stack, String data) {
-
+        List<Integer> coordinates = Arrays.stream(data.split(" "))
+                .map(Integer::valueOf)
+                .toList();
+        Point right = new Point(coordinates.get(0), coordinates.get(1));
+        Point bottom = new Point(coordinates.get(2), coordinates.get(3));
+        stack.push(new Oval(bottom, right));
     }
 
     @Override
